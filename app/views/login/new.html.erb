@@ -1,0 +1,27 @@
+<% provide(:title, "登陆")%>
+
+
+
+  <div class="col-md-6 col-md-offset-3">
+
+    <h2>登陆</h2>
+
+  	<%= form_for("login", url: {action: "create"}, method: "post") do |f| %>
+
+  	  <div class="actions">
+  	    <%= f.label :姓名 %>
+  	    <input type="text" name="login[name]" class="form-control" style="width:280px;" >
+      </div>
+
+  	  <div class="actions" >
+  	    <%= f.label :密码 %>
+  	    <input type='password' name="login[password]" class="form-control" style="width:280px;">
+      </div>
+
+  	  <div class="actions">
+        <button type="submint" class="btn btn-default">登陆</button>
+      </div>
+  	<% end %>
+  </div>
+
+  

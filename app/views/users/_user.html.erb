@@ -1,0 +1,15 @@
+<table class='table'>
+  
+      
+    
+        <%= link_to user.name, user %>
+      
+      <span class="timestamp">
+        <%= user.created_at.localtime.to_s(:db) %>  
+      </span>
+      <% if current_user.admin? && !current_user?(user) %>
+         <%= link_to "删除", user, method: :delete,
+                                    data: { confirm: "You sure?" } %>
+      <% end %>
+  
+</table>

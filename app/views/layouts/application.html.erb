@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>微博</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../" class="navbar-brand">微博</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <%= link_to '首页', microposts_path %>
+        </li>
+       
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if session[:id].present? %>
+          <li><%= link_to '用户', users_path %><li>
+          <li><%= link_to "信息", user_path(id: session[:id]) %></li>
+          <li><%= link_to "设置", edit_user_path(id: session[:id]) %></li>
+          <li><a href="/logout"  class=‘text-right’>退出</a></li>
+        <% else %>
+          <li><%= link_to '登陆', new_login_path %></li>
+          <li><%= link_to '注册', new_user_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+<%= yield %>
+</div>

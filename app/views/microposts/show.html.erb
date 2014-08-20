@@ -1,0 +1,51 @@
+<div class="col-md-6 col-md-offset-3">
+<p id="notice"><%= notice %></p>
+
+
+
+<h3>
+  <%= @micropost.content %>
+</h3>
+<table class="table table-bordered">
+
+  <table class='table'>
+    <% if @micropost.comments.any? %>
+      <h4>评论</h4>
+    <tr>
+    <th>内容</th>
+    <th>姓名</th>
+    <th>创建时间</th>
+    <th></th>
+
+    </tr>
+    <% @comments.each do |comment| %>
+      <tr>
+      <td><%= comment.body %></td>
+      <td><%= link_to comment.user.name, comment.user if comment.user.present? %></td>
+      <td><%= comment.created_at.localtime.to_s(:db)%></td>
+      <td><% if current_user?(@micropost.user) %>
+          <%= link_to "删除", micropost_comment_path(@micropost, comment), method: :delete,
+                                          data: { confirm: "You sure?" } %>
+          <% end %></td>
+
+      </tr>
+      <% end %>
+    <% end %>
+  </table>
+  
+</table>
+
+<h4>添加评论:</h4>
+<%= form_for([@micropost, @micropost.comments.build]) do |f| %>
+
+  
+  <div class="field">
+    
+    <%= f.text_area :body, placeholder: "写点评论...", :rows => 6%>
+  </div>
+    <%= f.submit "发表", class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>
+
+
+</div>

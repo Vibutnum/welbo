@@ -1,0 +1,26 @@
+<h2 id="overview" class="page-header">所有的用户</h2>
+
+<table class='table'>
+  <tr>
+    <th>姓名</th>
+    <th>邮箱</th>
+    <th></th>
+    
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%=link_to user.name, user %></td>
+    <td><%= user.email %></td>
+    <td><% if current_user.admin? && !current_user?(user) %>
+         <%= link_to "删除", user, method: :delete,
+                                    data: { confirm: "You sure?" } %>
+        <% end %>
+    </td>
+    
+    
+  </tr>
+<% end %>
+</table>
+
+<br />

@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <h2><%= @user.name %><h2>
+</p>
+<section>
+  <%= render 'shared/stats' %> 
+</section>
+  
+  <div class="span8">
+<%= render 'follow_form' if signed_in? %>
+
+
+<% if @user.microposts.any? %>
+  <h3>微博 (<%= @user.microposts.count %>)</h3>  
+<table class="table">
+  <tr>
+    
+    <th>内容</th>
+    <th>时间</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @microposts.each do |micropost| %>
+  <tr>
+    
+    <td><%=link_to micropost.content, micropost %></td>
+    <td><%= micropost.created_at.localtime.to_s(:db) %></td>
+    <td><%= link_to '详细', micropost %></td>
+    <% if current_user?(micropost.user) %>
+     <td><%= link_to '删除', micropost, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+
+
+<% end %>
+ 
